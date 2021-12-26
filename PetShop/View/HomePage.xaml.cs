@@ -13,25 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PetShop
+namespace PetShop.View
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для HomePage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HomePage : UserControl
     {
-        public MainWindow()
+        public HomePage()
         {
             InitializeComponent();
         }
-
-        
-            private void EnterClientApp_Click(object sender, RoutedEventArgs e)
-            {
-                Shop shopWindow = new Shop();
-                shopWindow.Show();
-                this.Close();
-            }
-        
     }
 }

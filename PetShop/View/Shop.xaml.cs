@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PetShop.ViewModel;
+using BLL.Interfaces;
+using PetShop.Util;
 
 namespace PetShop
 {
@@ -19,9 +22,11 @@ namespace PetShop
     /// </summary>
     public partial class Shop : Window
     {
-        public Shop()
+        public Shop(ICRUD crudService, IDialogService dialogService, ITypeProductService typeProduct, IOrderService orderService, IHistoryOrders historyOrders, IPrintCheck printCheck, int id)
         {
             InitializeComponent();
+            DataContext = new ViewModel.ShopVM(crudService, dialogService, typeProduct, orderService, historyOrders, printCheck, id);
         }
     }
 }
+                         

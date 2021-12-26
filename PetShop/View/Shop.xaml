@@ -1,0 +1,85 @@
+﻿<Window x:Class="PetShop.Shop"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PetShop"
+        mc:Ignorable="d"
+        xmlns:view="clr-namespace:PetShop.View"
+        Title="Shop"  Height="700"  Width="1200" WindowStartupLocation="CenterScreen">
+    <Grid Background="#FFF4C5BA">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="625*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TabControl Margin="0"
+                 VerticalAlignment="Stretch"
+                 HorizontalAlignment="Stretch"
+                 Grid.Column="0" Grid.Row="1" Style="{StaticResource MaterialDesignNavigatilRailTabControl}" Grid.ColumnSpan="2" Background="#FFD95A51">
+            <TabItem Width="180">
+                <TabItem.Header>
+                    <StackPanel Height="auto" Width="auto">
+                        <materialDesign:PackIcon Kind="Home" Width="24" Height="24" HorizontalAlignment="Center"  Foreground="White" />
+                        <TextBlock Text="Главная" HorizontalAlignment="Center" Foreground="White" />
+                    </StackPanel>
+                </TabItem.Header>
+                <view:HomePage Margin="0,-80,0,0" DataContext="{Binding Home}"/>
+
+            </TabItem>
+            <TabItem Width="180">
+                <TabItem.Header>
+                    <StackPanel Height="auto" Width="auto">
+                        <materialDesign:PackIcon Kind="AccountBox" Width="24" Height="24" HorizontalAlignment="Center"  Foreground="White" />
+                        <TextBlock Text="Профиль" HorizontalAlignment="Center" Foreground="White" />
+                    </StackPanel>
+                </TabItem.Header>
+                <view:PersonalArea Margin="0,-80,0,0" DataContext="{Binding PersonalArea}"/>
+
+            </TabItem>
+            <TabItem  Width="180">
+                <TabItem.Header>
+                    <StackPanel Height="auto" Width="auto">
+                        <materialDesign:PackIcon Kind="TextSearch" Width="24" Height="24" HorizontalAlignment="Center"  Foreground="White" />
+                        <TextBlock Text="Каталог" HorizontalAlignment="Center" Foreground="White" />
+                    </StackPanel>
+                </TabItem.Header>
+                <view:CatalogPage Margin="0,-80,0,0" DataContext="{Binding Catalog}"/>
+            </TabItem>
+            <TabItem Width="180" >
+                <TabItem.Header>
+                    <StackPanel Height="auto" Width="auto">
+                        <materialDesign:PackIcon Kind="ShoppingCart" Width="24" Height="24" HorizontalAlignment="Center"  Foreground="White" />
+                        <TextBlock Text="Корзина" HorizontalAlignment="Center" Foreground="White" />
+                    </StackPanel>
+                </TabItem.Header>
+                <view:ShoppingBasketPage Margin="0,-80,0,0" DataContext="{Binding ShoppingBasket}"/>
+            </TabItem>
+            <TabItem  Width="180">
+                <TabItem.Header>
+                    <StackPanel Height="auto" Width="auto">
+                        <materialDesign:PackIcon Kind="LocalShipping" Width="24" Height="24" HorizontalAlignment="Center"  Foreground="White" />
+                        <TextBlock Text="Доставки" HorizontalAlignment="Center" Foreground="White" />
+                    </StackPanel>
+                </TabItem.Header>
+                <view:Orders Margin="0,-80,0,0" DataContext="{Binding OrdersPage}"/>
+            </TabItem>
+        </TabControl>
+
+        <Grid Grid.Column="0" Grid.Row="0" Background="#FFD95A51">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="/img/fon.png" />
+            <Label Grid.Column="1" FontSize="40" FontWeight="DemiBold" Content="Мяу" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF890426" />
+        </Grid>
+    </Grid>
+</Window>

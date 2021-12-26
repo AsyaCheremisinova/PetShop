@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="PetShop.View.HomePage"
+            xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:f="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:local="clr-namespace:PetShop.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1020">
+
+    <!--<UserControl.Resources>
+        <DataTemplate x:Key="InternalTemplate">
+
+            <StackPanel Background="#FFD95A51"  Width="90" Height="120" Margin="5,5,5,5" >
+                <StackPanel Background="White" Width="90" Height="100" Margin="5,5,5,5" >
+                    <Image Source="{Binding Path=picture}" Width="80" Height="100" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBlock Text="{Binding Path = number}" FontSize="15" HorizontalAlignment="Center" Foreground="White"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ListTemplate">
+            <Border Background="#FFD95A51" CornerRadius="10" Margin="5">
+                <StackPanel Background="#FFD95A51"  Width="700"  Height="230" Margin="5,5,5,5" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="2*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid>
+
+                            <Border Background="White" Margin="5" CornerRadius="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding Path=date}" FontSize="20"></TextBlock>
+                                    <TextBlock Grid.Column="1" Text="Статус заказа:  " FontSize="20" HorizontalAlignment="Right"></TextBlock>
+                                    <TextBlock Grid.Column="2" Text="{Binding Path=status_name}" FontSize="20" HorizontalAlignment="Left"></TextBlock>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0" Height="150">
+                            <ListView x:Name="ProdList" ItemsSource="{Binding Path=historyProducts}"  ItemTemplate="{StaticResource InternalTemplate}">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" MaxWidth="{Binding ElementName=ProdList, Path=ActualWidth}"/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                            </ListView>
+                        </ScrollViewer>
+                        <Border Background="White" Margin="5" CornerRadius="5" Grid.Row="2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Пункт выдачи:  " FontSize="20" HorizontalAlignment="Right"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Path=point_name}" FontSize="20" HorizontalAlignment="Left"></TextBlock>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>-->
+    <Grid>
+        <Grid Background="AntiqueWhite">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="850*"></ColumnDefinition>
+                <ColumnDefinition Width="385*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="69*"></RowDefinition>
+                <RowDefinition Height="625*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="1" Background="#FFD95A51"/>
+
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="100*"></ColumnDefinition>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*"></RowDefinition>
+                    <RowDefinition Height="100*"></RowDefinition>
+                    <RowDefinition Height="20*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="455*"></ColumnDefinition>
+                        <ColumnDefinition Width="148*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="1" Background="#FFD95A51" Margin="0,-1,0,0">
+                
+            </Grid>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,10,0,0" >
+                <ListView x:Name="productsList" ItemsSource="{Binding Product}" >
+                    <!--<i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding SelectedIndex}" CommandParameter="{Binding ElementName=productsList, Path=SelectedIndex}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" MaxWidth="{Binding ElementName=productsList, Path=ActualWidth}"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Background="#FFD95A51"  Width="170" Height="270" Margin="5,5,5,5" >
+                                <StackPanel Background="White" Width="170" Height="170" Margin="5,5,5,5" >
+                                    <Image Source="{Binding Path=picture}" Width="170" Height="170" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                </StackPanel>
+                                <TextBlock  Foreground="White" Text="{Binding Path=product_name}" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Margin="5,5,5,5" />
+                                <TextBlock Foreground="White" Text="{Binding Path=cost}" Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" VerticalAlignment="Center" Height="44" Margin="5,5,5,5"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+ 
+</UserControl>

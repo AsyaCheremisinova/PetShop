@@ -1,0 +1,306 @@
+﻿<UserControl x:Class="PetShop.View.ShoppingBasketPage"
+              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:f="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:local="clr-namespace:PetShop.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1020">
+    <Grid>
+        <Grid Background="AntiqueWhite">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42*"></RowDefinition>
+                <RowDefinition Height="569*"></RowDefinition>
+                <RowDefinition Height="63*"></RowDefinition>
+                <RowDefinition Height="26*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="1" Text="Корзина пуста" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="50" Visibility="{Binding Visibility}"></TextBlock>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,10.6,0,1.2" >
+                <ListView x:Name="BasketList" ItemsSource="{Binding products}" HorizontalContentAlignment="Center" >
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" MaxWidth="{Binding ElementName=BasketList, Path=ActualWidth}"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Margin" Value="0,5,0,5"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="IsSelected" Value="True"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="700" Height="200" Margin="5" Background="#FFD95A51" CornerRadius="15">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="108*"></ColumnDefinition>
+                                        <ColumnDefinition Width="323*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Border  Background="White"  CornerRadius="15" BorderThickness="4" Grid.Column="0" Margin="5,5,0,5" >
+                                        <StackPanel Background="White" Height="170" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5">
+                                            <Image Source="{Binding Path=picture}" Width="170" Height="170" Stretch="Uniform"   />
+                                        </StackPanel>
+                                    </Border>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="269*"></RowDefinition>
+                                            <RowDefinition Height="207*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Border Grid.Row="0" BorderBrush="#FFD95A51" Background="White"  CornerRadius="15" BorderThickness="4" Margin="5">
+                                            <TextBlock TextWrapping="Wrap" Foreground="Black" Text="{Binding Path=product_name}" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Margin="5" FontSize="15" />
+                                        </Border>
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="201*"></ColumnDefinition>
+                                                <ColumnDefinition Width="287*"></ColumnDefinition>
+                                                <ColumnDefinition Width="158*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Column="0" BorderBrush="#FFD95A51" Background="White"  CornerRadius="15" BorderThickness="4" Margin="5">
+                                                <TextBlock Foreground="Black" Text="{Binding Path=cost}" Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="5"/>
+                                            </Border>
+                                            <Grid Grid.Column="1" >
+                                                <Grid.ColumnDefinitions >
+                                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+
+                                                    <Button Command="{Binding Path=DataContext.MinusNumber, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"   Style="{StaticResource MaterialDesignFlatButton}" Foreground="White" CommandParameter="{Binding ElementName=BasketList, Path=SelectedIndex}"    ToolTip="MaterialDesignFloatingActionMiniLightButton" HorizontalAlignment="Right" VerticalAlignment="Center" Height="50" Width="50">
+                                                    <materialDesign:PackIcon Kind="Minus" Height="25" Width="25" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                                                </Button>
+                                                    <TextBlock TextAlignment="Center" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,0" Height="30" Text="{Binding Path=number}" Foreground="White" FontSize="14" Width="40" FontWeight="DemiBold"/>
+                                                    <Button Command="{Binding Path=DataContext.PlusNumber, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"  Style="{StaticResource MaterialDesignFlatButton}"  Foreground="White" CommandParameter="{Binding ElementName=BasketList, Path=SelectedIndex}"    Grid.Column="2" ToolTip="MaterialDesignFloatingActionMiniLightButton" HorizontalAlignment="Left" VerticalAlignment="Center" Height="50" Width="50">
+                                                        <materialDesign:PackIcon Kind="Plus" Height="25" Width="25" HorizontalAlignment="Center"  VerticalAlignment="Center" />
+                                                </Button>
+                                            </Grid>
+                                            <Grid Grid.Column="2">                                                
+                                                <Button Margin="5" Height="40" Style="{StaticResource MaterialDesignFlatButton}" Foreground="White" Command="{Binding Path = DataContext.DeleteProduct, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding ElementName=BasketList, Path=SelectedIndex}" >
+                                                   
+                                                    <materialDesign:PackIcon Kind="DeleteOutline" Height="34" Width="41"  />
+                                                </Button>
+                                            </Grid>
+
+                                        </Grid>
+                                    </Grid>
+
+                                </Grid>
+                            </StackPanel>
+                            </Border>                          
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+            <Border  Grid.Row="2"  BorderBrush="#FFD95A51" Background="#FFD95A51"  CornerRadius="15" BorderThickness="4" Margin="0,3.8,0,0.4" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding ButtonVisibility}"  >
+                <Button Content="Оформить заказ" FontSize="20" Style="{StaticResource MaterialDesignFlatButton}" Foreground="White" Margin="5,6,5,6.4" Height="Auto" Command="{Binding OpenOrderForm}" >
+
+                </Button>
+            </Border>
+        </Grid>
+
+        <Grid Name="OrderGrid" Visibility="{Binding OrderFormVisibility}" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+                <ColumnDefinition Width="346*"></ColumnDefinition>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="210*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" Opacity="0.5"  Background="Black"/>
+            <Grid Grid.Row="1" Grid.Column="0" Opacity="0.5"  Background="Black"/>
+            <Grid Grid.Row="2" Grid.Column="0" Opacity="0.5"  Background="Black"/>
+            <Grid Grid.Row="0" Grid.Column="1" Opacity="0.5"  Background="Black"/>
+            <Grid Grid.Row="0" Grid.Column="2" Opacity="0.5"  Background="Black"/>
+            <Grid Grid.Row="1" Grid.Column="2" Opacity="0.5"  Background="Black"/>
+            <Grid Grid.Row="2" Grid.Column="2" Opacity="0.5"  Background="Black"/>
+            <Grid Grid.Row="2" Grid.Column="1" Opacity="0.5"  Background="Black">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="162*"/>
+                    <ColumnDefinition Width="295*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+
+            <Grid Background="AntiqueWhite" Grid.Column="1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="89*"></ColumnDefinition>
+                    <ColumnDefinition Width="455*"></ColumnDefinition>
+                    <ColumnDefinition Width="296*"></ColumnDefinition>
+                    <ColumnDefinition Width="74*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="66*"></RowDefinition>
+                    <RowDefinition Height="120*"></RowDefinition>
+                    <RowDefinition Height="210*"></RowDefinition>
+
+                    <RowDefinition Height="125*"></RowDefinition>
+                    <RowDefinition Height="67*"></RowDefinition>
+
+
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="0" Grid.Row="1" Margin="0,0.6,4.8,11.4"   >
+                    <Button x:Name="back" HorizontalAlignment="Right"  Style="{StaticResource MaterialDesignFlatButton}" Foreground="#FFF9463F" Height="Auto" RenderTransformOrigin="-1.857,0.45" Command="{Binding CloseOrderForm}" >
+                        <materialDesign:PackIcon Kind="ArrowBack" Height="34" Width="41"  />
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"  Background="#FFD95A51" Margin="0,0,0.4,0.4" >
+                    <TextBlock  Text="Оформление заказа" Foreground="White" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="1" Margin="0.2,0.6,0,11.4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="71*"></RowDefinition>
+                        <RowDefinition Height="66*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Label Content="Выберите пункт выдачи заказа:" FontSize="27" VerticalAlignment="Center"></Label>
+                    </Grid>
+                    <ComboBox Background="White" Grid.Row="1" DisplayMemberPath ="pick_up_point_name"  ItemsSource="{Binding points}" SelectedItem="{Binding Point}">
+                        
+                    </ComboBox>
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60*"></RowDefinition>
+                        <RowDefinition Height="90*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1" Visibility="{Binding TextVisibility}">
+                        <TextBlock Text="Укажите пункт выдачи!" FontSize="20" Margin="10" HorizontalAlignment="Center" Foreground="#FFD95A51">                            
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,10,0,0" >
+                        <ListView x:Name="OrderProdList" ItemsSource="{Binding products}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" MaxWidth="{Binding ElementName=OrderProdList, Path=ActualWidth}"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Background="#FFD95A51"  Width="90" Height="145" Margin="5,5,5,5" >
+                                        <StackPanel Background="White" Width="90" Height="100" Margin="5,5,5,5" >
+                                            <Image Source="{Binding Path=picture}" Width="80" Height="100" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding Path = number}" FontSize="15" HorizontalAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
+                </Grid>
+
+                <Grid Grid.Row="3" Grid.Column="1">
+                    <Border  BorderBrush="#FFD95A51" Background="#FFD95A51"  CornerRadius="15" BorderThickness="4">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40*"></RowDefinition>
+                                <RowDefinition Height="39*"></RowDefinition>
+                                <RowDefinition Height="38*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="224*"></ColumnDefinition>
+                                <ColumnDefinition Width="223*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Row="0" Grid.Column="0">
+                                <Label Content="Стоимость заказа:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Foreground="White"></Label>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="0">
+                                <Label Content="Скидка:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Foreground="White"></Label>
+                            </Grid>
+                            <Grid Grid.Row="2" Grid.Column="0">
+                                <Label Content="Итого:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Foreground="White"></Label>
+                            </Grid>
+                            <Grid Grid.Row="0" Grid.Column="1">
+                                <TextBlock Foreground="White" Text="{Binding costOrder}" Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="5"/>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <TextBlock Foreground="White" Text="{Binding sale}" Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="5"></TextBlock>
+                            </Grid>
+                            <Grid Grid.Row="2" Grid.Column="1">
+                                <TextBlock Foreground="White" Text="{Binding OrderCost}" Style="{StaticResource MaterialDesignBody1TextBlock}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="5"></TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="4" Grid.Column="1">
+                    <Button Content="Заказать" FontSize="20" Style="{StaticResource MaterialDesignFlatButton}" Foreground="#FFD95A51" Margin="5,6,5,6.4" Height="Auto" Command="{Binding NewOrder}">
+
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="3" Margin="0,119.6,0.4,0" Grid.RowSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="55*"></RowDefinition>
+                        <RowDefinition Height="23*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Border Visibility="{Binding EmptyVisibility}" BorderBrush="#FFD95A51" Margin="200" BorderThickness="4" CornerRadius="15" >
+        <Grid   Background="AntiqueWhite">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="4*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="#FFD95A51">
+                <TextBlock Text="Ошибка оформления заказа" FontSize="30" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                    <Button Content="ok" Foreground="White" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Command="{Binding CloseEmpty}"></Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock Text="Попробуйте уменьшить количество следующих товаров:" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22"></TextBlock>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,10,0,0" >
+                            <ListView  x:Name="EmptyProductsList" ItemsSource="{Binding EmptyProducts}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" MaxWidth="{Binding ElementName=EmptyProductsList, Path=ActualWidth}"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Width="550" Height="45" Margin="5,5,5,5" >
+                                            <TextBlock Text="{Binding Path = product_name}" FontSize="15" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+        </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>
